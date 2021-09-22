@@ -9,6 +9,9 @@ public class ThemeDto {
     @NotNull(message = "Enter theme for questions")
     private String name;
 
+    @NotNull(message = "Enter description for questions")
+    private String description;
+
     @NotNull(message = "Select course, please")
     private Integer courseId;
 

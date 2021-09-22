@@ -31,9 +31,9 @@ public class ThemeService {
             return new ResponseApi("Course not found", false);
         if (themeRepository.existsByNameAndCourse_Id(themeDto.getName(), optionalCourse.get().getId()))
             return new ResponseApi("Theme is already created in the course", false);
-        Theme theme = new Theme(null, themeDto.getName(), optionalCourse.get());
+        Theme theme = new Theme(null, themeDto.getName(), themeDto.getDescription(), optionalCourse.get());
         themeRepository.save(theme);
-        return new ResponseApi("THeme is created", true);
+        return new ResponseApi("Theme is created", true);
     }
 
     /**
@@ -73,6 +73,7 @@ public class ThemeService {
             return new ResponseApi("Theme is already created in the course", false);
         Theme theme = optionalTheme.get();
         theme.setName(themeDto.getName());
+        theme.setDescription(themeDto.getDescription());
         theme.setCourse(optionalCourse.get());
         themeRepository.save(theme);
         return new ResponseApi("Theme data is updated", true);

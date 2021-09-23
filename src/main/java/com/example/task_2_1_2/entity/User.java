@@ -1,6 +1,5 @@
 package com.example.task_2_1_2.entity;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,17 +10,16 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-public class Answer {
+@Table(name = "users")
+public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(nullable = false)
-    private String solution;
+    private String username;
 
-    @OneToOne
-    private Question question;
+    @Column(nullable = false)
+    private String password;
 
-    @ManyToOne
-    private User user;
 }

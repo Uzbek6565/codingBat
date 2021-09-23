@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AnswerRepository extends JpaRepository<Answer, Integer> {
     boolean existsBySolutionAndQuestion_Id(String solution, Integer question_id);
+    boolean existsBySolutionAndQuestion_IdAndUser_Id(String solution, Integer question_id, Integer user_id);
 }

@@ -11,4 +11,7 @@ public class AnswerDto {
 
     @NotNull(message = "Select course, please")
     private Integer questionId;
+
+    @NotNull(message = "Username can not be empty")
+    private Integer userId;
 }

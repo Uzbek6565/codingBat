@@ -38,8 +38,8 @@ public class UserController {
      * @return List<User>
      */
     @GetMapping
-    public ResponseEntity<List<User>> getAll(){
-        List<User> all = userService.getAll();
+    public ResponseEntity<List<User>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<User> all = userService.getAll(page, size);
         return ResponseEntity.status(all.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.FOUND).body(all);
     }
 

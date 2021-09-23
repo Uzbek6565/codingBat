@@ -38,8 +38,8 @@ public class QuestionController {
      * @return List<Question>
      */
     @GetMapping
-    public ResponseEntity<List<Question>> getAll(){
-        List<Question> all = questionService.getAll();
+    public ResponseEntity<List<Question>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<Question> all = questionService.getAll(page, size);
         return ResponseEntity.status(all.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.FOUND).body(all);
     }
 

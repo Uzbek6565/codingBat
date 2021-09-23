@@ -9,6 +9,9 @@ import com.example.task_2_1_2.repository.AnswerRepository;
 import com.example.task_2_1_2.repository.QuestionRepository;
 import com.example.task_2_1_2.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +30,7 @@ public class AnswerService {
 
     /**
      * Creating new answer
+     *
      * @param answerDto - solution, question id
      * @return ResponseApi - result message and success bit while creating
      */
@@ -46,14 +50,18 @@ public class AnswerService {
 
     /**
      * Reading all answers
+     *
      * @return List<Answer>
      */
-    public List<Answer> getAll() {
-        return answerRepository.findAll();
+    public List<Answer> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Answer> answerPage = answerRepository.findAll(pageable);
+        return answerPage.getContent(); //getContent returns page and size
     }
 
     /**
      * Reading answer by id
+     *
      * @param id - answer id
      * @return ResponseApi - result message, success bit, Answer object while reading
      */
@@ -66,7 +74,8 @@ public class AnswerService {
 
     /**
      * Updatind answer by id
-     * @param id - answer id
+     *
+     * @param id        - answer id
      * @param answerDto - solution, question id
      * @return ResponseApi - result message and success bit while updating
      */
@@ -87,7 +96,6 @@ public class AnswerService {
     }
 
     /**
-     *
      * @param id - answer id
      * @return ResponseApi - result message and success bit while deleting
      */

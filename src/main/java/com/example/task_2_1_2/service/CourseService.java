@@ -5,6 +5,9 @@ import com.example.task_2_1_2.message.ResponseApi;
 import com.example.task_2_1_2.payload.CourseDto;
 import com.example.task_2_1_2.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,9 +34,13 @@ public class CourseService {
     /**
      * Reading all courses
      * @return List<Course>
+     * @param page
+     * @param size
      */
-    public List<Course> getAll() {
-        return courseRepository.findAll();
+    public List<Course> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Course> all = courseRepository.findAll(pageable);
+        return all.getContent();
     }
 
     /**

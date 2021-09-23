@@ -38,8 +38,8 @@ public class ThemeController {
      * @return List<Theme>
      */
     @GetMapping
-    public ResponseEntity<List<Theme>> getAll(){
-        List<Theme> all = themeService.getAll();
+    public ResponseEntity<List<Theme>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<Theme> all = themeService.getAll(page, size);
         return ResponseEntity.status(all.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.FOUND).body(all);
     }
 

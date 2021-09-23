@@ -7,6 +7,9 @@ import com.example.task_2_1_2.payload.QuestionDto;
 import com.example.task_2_1_2.repository.QuestionRepository;
 import com.example.task_2_1_2.repository.ThemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -39,9 +42,13 @@ public class QuestionService {
     /**
      * Reading all questions
      * @return List<Question>
+     * @param page
+     * @param size
      */
-    public List<Question> getAll() {
-        return questionRepository.findAll();
+    public List<Question> getAll(int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        Page<Question> all = questionRepository.findAll(pageable);
+        return all.getContent();
     }
 
     /**

@@ -38,8 +38,8 @@ public class CourseController {
      * @return List<Course>
      */
     @GetMapping
-    public ResponseEntity<List<Course>> getAll(){
-        List<Course> all = courseService.getAll();
+    public ResponseEntity<List<Course>> getAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size){
+        List<Course> all = courseService.getAll(page, size);
         return ResponseEntity.status(all.isEmpty() ? HttpStatus.NO_CONTENT : HttpStatus.FOUND).body(all);
     }
 
